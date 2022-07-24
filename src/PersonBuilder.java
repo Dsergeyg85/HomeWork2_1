@@ -1,3 +1,5 @@
+import java.util.OptionalInt;
+
 public class PersonBuilder {
     private String name;
     private String surname;
@@ -12,7 +14,7 @@ public class PersonBuilder {
         return this;
     }
     public PersonBuilder setAge(int age) throws IllegalArgumentException {
-        if (age >= 0) {
+        if (this.age >= 0) {
             this.age = age;
             return this;
         } else {
@@ -28,9 +30,9 @@ public class PersonBuilder {
         Person person;
         if (this.name != null && this.surname != null) {
             if (this.age >= 0) {
-                person = new Person(this.name, this.surname, this.age);
+                person = new Person(this.name, this.surname, OptionalInt.of(this.age));
             } else {
-                person = new Person(this.name, this.surname);
+                person = new Person(this.name, this.surname, OptionalInt.of(0));
             }
             if (this.address != null) {
                 person.setAddress(this.address);
